@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">BetterWeather</string>
+    <string name="main_greeting">Hello from The Better Weather!</string>
+</resources>
