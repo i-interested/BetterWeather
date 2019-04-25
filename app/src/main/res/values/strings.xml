@@ -1,9 +1,16 @@
 <resources>
     <string name="app_name">BetterWeather</string>
-    <string name="main_greeting">Hello from The Better Weather!</string>
     <string name="main_part_of_day">Понедельник, день</string>
-    <string name="weather_now">+6°C</string>
-    <string name="humidity">Влажность 54%</string>
-    <string name="pressure">Давление 747 мм рт. ст.</string>
-    <string name="wind">Ветер 5,0 м/с, З</string>
+    <string name="main_weather_now">+6°C</string>
+    <string name="main_humidity">Влажность 54%</string>
+    <string name="main_pressure">Давление 747 мм рт. ст.</string>
+    <string name="main_wind">Ветер 5,0 м/с, З</string>
+    <string name="settings_hint_location_name">Город, например Москва</string>
+    <string name="settings_show_additional_info">Отображать доп. информацию</string>
+    <string name="image_weather_now_description">Солнечно</string>
+    <string name="button_refresh_description">Обновить</string>
+    <string name="button_settings_description">Настройки</string>
+    <string name="main_location_name">Барнаул</string>
+    <string name="main_activity_name">Погода, она такая</string>
+    <string name="settings_activity_name">Настройки</string>
 </resources>
