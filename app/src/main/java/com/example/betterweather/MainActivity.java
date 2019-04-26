@@ -1,34 +1,72 @@
 package com.example.betterweather;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView textViewLocationName;
+    private LinearLayout linearLayoutAdditionalInfo;
+    private FutureWeather[] futureWeathers = {
+            new FutureWeather("+12°C", "29 апр.", R.drawable.sun),
+            new FutureWeather("+14°C", "30 апр.", R.drawable.sun),
+            new FutureWeather("+16°C", "1 мая", R.drawable.sun),
+            new FutureWeather("+21°C", "2 мая", R.drawable.sun),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String instanceState;
-        if (savedInstanceState == null) {
-            instanceState = "Первый запуск!";
-        } else {
-            instanceState = "Повторный запуск!";
-        }
+        String instanceState = savedInstanceState == null ? "Первый запуск!" : "Повторный запуск!";
         logLifeCycle(instanceState + " - onCreate()");
 
-        SetListners();
+        InitViewItems();
     }
 
-    private void SetListners() {
-        ImageButton buttonRefresh = findViewById(R.id.buttonRefresh);
-        ImageButton buttonSettings = findViewById(R.id.buttonSettings);
+    private void InitViewItems() {
+        textViewLocationName = findViewById(R.id.location_name);
+        linearLayoutAdditionalInfo = findViewById(R.id.additional_info);
+        ImageButton buttonRefresh = findViewById(R.id.button_refresh);
+        ImageButton buttonSettings = findViewById(R.id.button_settings);
+        GridView gridView = findViewById(R.id.grid_view_feature_weather);
+        FutureWeatherAdapter futureWeatherAdapter = new FutureWeatherAdapter(this, futureWeathers);
+
         buttonRefresh.setOnClickListener((l) -> logLifeCycle("buttonRefresh->onClick()"));
-        buttonSettings.setOnClickListener((l) -> logLifeCycle("buttonSettings->onClick()"));
+        buttonSettings.setOnClickListener((l) -> {
+            logLifeCycle("buttonSettings->onClick()");
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            settingsIntent.putExtra(Identifiers.LOCATION_NAME, textViewLocationName.getText());
+            settingsIntent.putExtra(Identifiers.ADDITIONAL_INFO, linearLayoutAdditionalInfo.getVisibility() == View.VISIBLE);
+            startActivityForResult(settingsIntent, Identifiers.SETTINGS_CODE);
+        });
+
+        gridView.setAdapter(futureWeatherAdapter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode != Identifiers.SETTINGS_CODE || resultCode != Activity.RESULT_OK)
+            return;
+
+        if (data == null)
+            return;
+
+        String locationName = data.getStringExtra(Identifiers.LOCATION_NAME);
+        textViewLocationName.setText(locationName);
+        boolean showAdditional = data.getBooleanExtra(Identifiers.ADDITIONAL_INFO, true);
+        linearLayoutAdditionalInfo.setVisibility(showAdditional ? View.VISIBLE : View.GONE);
     }
 
     @Override
