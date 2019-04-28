@@ -13,15 +13,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView textViewLocationName;
     private LinearLayout linearLayoutAdditionalInfo;
-    private FutureWeather[] futureWeathers = {
+    private FutureWeather[] futureWeathersRu = {
             new FutureWeather("+12°C", "29 апр.", R.drawable.sun),
             new FutureWeather("+14°C", "30 апр.", R.drawable.sun),
             new FutureWeather("+16°C", "1 мая", R.drawable.sun),
             new FutureWeather("+21°C", "2 мая", R.drawable.sun),
+    };
+
+    private FutureWeather[] futureWeathers = {
+            new FutureWeather("+12°C", "Apr. 29", R.drawable.sun),
+            new FutureWeather("+14°C", "Apr. 30", R.drawable.sun),
+            new FutureWeather("+16°C", "May 1", R.drawable.sun),
+            new FutureWeather("+21°C", "May 2", R.drawable.sun),
     };
 
     @Override
@@ -32,16 +41,18 @@ public class MainActivity extends AppCompatActivity {
         String instanceState = savedInstanceState == null ? "Первый запуск!" : "Повторный запуск!";
         logLifeCycle(instanceState + " - onCreate()");
 
-        InitViewItems();
+        initViewItems();
     }
 
-    private void InitViewItems() {
+    private void initViewItems() {
         textViewLocationName = findViewById(R.id.location_name);
         linearLayoutAdditionalInfo = findViewById(R.id.additional_info);
         ImageButton buttonRefresh = findViewById(R.id.button_refresh);
         ImageButton buttonSettings = findViewById(R.id.button_settings);
         GridView gridView = findViewById(R.id.grid_view_feature_weather);
-        FutureWeatherAdapter futureWeatherAdapter = new FutureWeatherAdapter(this, futureWeathers);
+        Locale ruLocale = new Locale("ru","RU");
+        FutureWeatherAdapter futureWeatherAdapter = new FutureWeatherAdapter(this,
+                Locale.getDefault().equals(ruLocale) ? futureWeathersRu : futureWeathers);
 
         buttonRefresh.setOnClickListener((l) -> logLifeCycle("buttonRefresh->onClick()"));
         buttonSettings.setOnClickListener((l) -> {

@@ -7,29 +7,16 @@
 
     <ImageView
         android:id="@+id/linearlayout_imageview_weather"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/layout_w_h_50dp"
+        android:layout_height="@dimen/layout_w_h_50dp"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/linearlayout_textview_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingLeft="8dp"
-        android:paddingTop="4dp"
-        android:paddingRight="8dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/AppTheme.WHWrapContent.GridViewTextView" />
 
     <TextView
         android:id="@+id/linearlayout_textview_temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:paddingLeft="8dp"
-        android:paddingTop="4dp"
-        android:paddingRight="8dp"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        style="@style/AppTheme.WHWrapContent.GridViewTextView" />
+
 </LinearLayout>
