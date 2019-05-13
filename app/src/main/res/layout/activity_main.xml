@@ -93,7 +93,6 @@
             android:layout_marginTop="@dimen/margin_20dp"
             android:gravity="center"
             android:numColumns="4" />
-
     </LinearLayout>
 
     <ImageButton
@@ -113,6 +112,5 @@
         android:src="@drawable/settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-
 
 </android.support.constraint.ConstraintLayout>

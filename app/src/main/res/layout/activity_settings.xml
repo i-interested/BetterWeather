@@ -24,7 +24,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_10dp"
             android:text="@string/settings_show_additional_info" />
-
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
