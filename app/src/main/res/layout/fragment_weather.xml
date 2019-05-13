@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WeatherFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|top"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/image_weather_now"
+                style="@style/AppTheme.WHWrapContent"
+                android:layout_margin="@dimen/margin_10dp"
+                android:layout_weight="0.5"
+                android:contentDescription="@string/image_weather_now_description"
+                android:src="@drawable/sun" />
+
+            <TextView
+                android:id="@+id/text_weather_now"
+                style="@style/AppTheme.WHWrapContent"
+                android:layout_weight="0.5"
+                android:text="@string/main_weather_now"
+                android:textSize="@dimen/text_60sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/additional_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_humidity_now"
+                style="@style/AppTheme.WHWrapContent.AdditionalInfo"
+                android:text="@string/main_humidity" />
+
+            <TextView
+                android:id="@+id/text_pressure_now"
+                style="@style/AppTheme.WHWrapContent.AdditionalInfo"
+                android:text="@string/main_pressure" />
+
+            <TextView
+                android:id="@+id/text_wind_now"
+                style="@style/AppTheme.WHWrapContent.AdditionalInfo"
+                android:text="@string/main_wind" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
