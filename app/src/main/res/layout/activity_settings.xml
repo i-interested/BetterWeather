@@ -11,19 +11,41 @@
         android:layout_margin="@dimen/margin_20dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/settings_location_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_10dp"
-            android:hint="@string/settings_hint_location_name" />
-
         <Switch
             android:id="@+id/settings_show_additional_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_10dp"
             android:text="@string/settings_show_additional_info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/settings_location_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10dp"
+                android:layout_weight="1"
+                android:hint="@string/settings_hint_location_name" />
+
+            <Button
+                android:id="@+id/add_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_cities"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
