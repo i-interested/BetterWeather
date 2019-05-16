@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BetterWeather</string>
-    <string name="main_part_of_day">Понедельник, день</string>
-    <string name="main_weather_now">+6°C</string>
-    <string name="main_humidity">Влажность 54%</string>
-    <string name="main_pressure">Давление 747 мм рт. ст.</string>
-    <string name="main_wind">Ветер 5,0 м/с, З</string>
+    <string name="main_part_of_day">%1$s, %2$s</string>
+    <string name="main_weather_now">%1$s°C</string>
+    <string name="main_humidity">Влажность %1$s %%</string>
+    <string name="main_pressure">Давление %1$s мм рт. ст.</string>
+    <string name="main_wind">Ветер %1$s м/с, %2$s</string>
     <string name="settings_hint_location_name">Город, например Москва</string>
     <string name="settings_show_additional_info">Отображать доп. информацию</string>
     <string name="image_weather_now_description">Солнечно</string>

@@ -1,5 +1,6 @@
 package com.example.betterweather;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -13,6 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
             new FutureWeather("+21°C", "May 2", R.drawable.sun),
     };
 
+    private String[] partsOfDay = {"Morning", "Day", "Evening", "Night"};
+    private String[] partsOfDayRu = {"Утро", "День", "Вечер", "Ночь"};
+    private Locale ruLocale = new Locale("ru", "RU");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton buttonRefresh = findViewById(R.id.button_refresh);
         ImageButton buttonSettings = findViewById(R.id.button_settings);
         GridView gridView = findViewById(R.id.grid_view_feature_weather);
-        Locale ruLocale = new Locale("ru","RU");
+
         FutureWeatherAdapter futureWeatherAdapter = new FutureWeatherAdapter(this,
                 Locale.getDefault().equals(ruLocale) ? futureWeathersRu : futureWeathers);
 
@@ -64,6 +76,36 @@ public class MainActivity extends AppCompatActivity {
         });
 
         gridView.setAdapter(futureWeatherAdapter);
+
+        TextView day = findViewById(R.id.text_part_of_day);
+        String dayTemplate = getString(R.string.main_part_of_day);
+        String dayText = String.format(dayTemplate, getDayOfWeek(), getPartOfDay());
+        day.setText(dayText);
+    }
+
+
+    private String getDayOfWeek() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
+            return dayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault());
+        }
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        return sdf.format(Calendar.getInstance());
+    }
+
+    private String getPartOfDay() {
+        int hours = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int idx;
+        if (hours > 6 && hours < 11)
+            idx = 0;
+        else if (hours >= 11 && hours <= 18)
+            idx = 1;
+        else if (hours > 18 && hours <= 23)
+            idx = 2;
+        else
+            idx = 3;
+        return Locale.getDefault().equals(ruLocale) ? partsOfDayRu[idx] : partsOfDay[idx];
     }
 
     @Override
