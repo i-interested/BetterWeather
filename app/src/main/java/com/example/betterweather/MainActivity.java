@@ -2,23 +2,25 @@ package com.example.betterweather;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.ImageButton;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageButton buttonRefresh;
-    private ImageButton buttonSettings;
     private RecyclerView mainRecyclerView;
     private MainWeatherAdapter mainWeatherAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +40,17 @@ public class MainActivity extends AppCompatActivity {
         mainRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mainWeatherAdapter = new MainWeatherAdapter(getString(R.string.main_part_of_day));
         mainRecyclerView.setAdapter(mainWeatherAdapter);
-        buttonRefresh.setOnClickListener((l) -> logLifeCycle("buttonRefresh->onClick()"));
-        buttonSettings.setOnClickListener((l) -> {
-            logLifeCycle("buttonSettings->onClick()");
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            settingsIntent.putExtra(Identifiers.CITIES, mainWeatherAdapter.getCities());
-            settingsIntent.putExtra(Identifiers.ADDITIONAL_INFO, mainWeatherAdapter.getLinearLayoutAdditionalInfoVisibility());
-            startActivityForResult(settingsIntent, Identifiers.SETTINGS_CODE);
-        });
+        swipeRefreshLayout.setOnRefreshListener(() ->
+                new Handler().postDelayed(() -> {
+
+                    swipeRefreshLayout.setRefreshing(false);
+                }, 2000)
+        );
     }
 
     private void findViews() {
-        buttonRefresh = findViewById(R.id.button_refresh);
-        buttonSettings = findViewById(R.id.button_settings);
         mainRecyclerView = findViewById(R.id.main_recycler_view);
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
     }
 
 
@@ -67,6 +66,27 @@ public class MainActivity extends AppCompatActivity {
         mainWeatherAdapter.setCities(cities);
         boolean showAdditional = data.getBooleanExtra(Identifiers.ADDITIONAL_INFO, true);
         mainWeatherAdapter.setLinearLayoutAdditionalInfoVisibility(showAdditional);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                settingsIntent.putExtra(Identifiers.CITIES, mainWeatherAdapter.getCities());
+                settingsIntent.putExtra(Identifiers.ADDITIONAL_INFO, mainWeatherAdapter.getLinearLayoutAdditionalInfoVisibility());
+                startActivityForResult(settingsIntent, Identifiers.SETTINGS_CODE);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

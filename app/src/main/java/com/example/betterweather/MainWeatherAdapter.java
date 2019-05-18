@@ -11,24 +11,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.Random;
 
 public class MainWeatherAdapter extends RecyclerView.Adapter<MainWeatherAdapter.MainWeatherHolder> {
-
-    private FutureWeather[] futureWeathersRu = {
-            new FutureWeather("+12°C", "29 апр.", R.drawable.sun),
-            new FutureWeather("+14°C", "30 апр.", R.drawable.sun),
-            new FutureWeather("+16°C", "1 мая", R.drawable.sun),
-            new FutureWeather("+21°C", "2 мая", R.drawable.sun),
-    };
-
-    private FutureWeather[] futureWeathers = {
-            new FutureWeather("+12°C", "Apr. 29", R.drawable.sun),
-            new FutureWeather("+14°C", "Apr. 30", R.drawable.sun),
-            new FutureWeather("+16°C", "May 1", R.drawable.sun),
-            new FutureWeather("+21°C", "May 2", R.drawable.sun),
-    };
 
     private ArrayList<String> cities = new ArrayList<>(Arrays.asList("Barnaul", "Moscow"));
     private String dayTemplate;
@@ -68,9 +53,8 @@ public class MainWeatherAdapter extends RecyclerView.Adapter<MainWeatherAdapter.
     @Override
     public void onBindViewHolder(@NonNull MainWeatherHolder mainWeatherHolder, int i) {
         String city = cities.get(i);
-        String dayText = String.format(dayTemplate, Helpers.getDayOfWeek(), Helpers.getPartOfDay());
-        mainWeatherHolder.binds(city, dayText, Locale.getDefault().equals(Helpers.ruLocale) ? futureWeathersRu : futureWeathers, additionalInfoVisibility);
-
+        String dayText = String.format(dayTemplate, Helpers.getDayOfWeek(), Helpers.getPartOfDay(mainWeatherHolder.itemView.getContext()));
+        mainWeatherHolder.binds(city, dayText, Helpers.getFutureWeather(mainWeatherHolder.itemView.getContext()), additionalInfoVisibility);
     }
 
     @Override
@@ -87,8 +71,6 @@ public class MainWeatherAdapter extends RecyclerView.Adapter<MainWeatherAdapter.
         private TextView day;
         private GridView gridView;
 
-        private String[] winds = {"N", "S", "E", "W", "NW", "NE", "SE", "SW"};
-        private String[] windsRu = {"С", "Ю", "В", "З", "СЗ", "СВ", "ЮВ", "ЮЗ"};
 
         public MainWeatherHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,12 +113,12 @@ public class MainWeatherAdapter extends RecyclerView.Adapter<MainWeatherAdapter.
         }
 
         private void initWindValue(@NonNull View itemView) {
-            Locale ruLocale = new Locale("ru", "RU");
             TextView wind = itemView.findViewById(R.id.text_wind_now);
             String windTemplate = itemView.getResources().getString(R.string.main_wind);
             int windValue = random.nextInt(20);
+            String[] winds = itemView.getResources().getStringArray(R.array.winds);
             int idx = random.nextInt(winds.length);
-            String windText = String.format(windTemplate, String.valueOf(windValue), Locale.getDefault().equals(ruLocale) ? windsRu[idx] : winds[idx]);
+            String windText = String.format(windTemplate, String.valueOf(windValue), winds[idx]);
             wind.setText(windText);
         }
 

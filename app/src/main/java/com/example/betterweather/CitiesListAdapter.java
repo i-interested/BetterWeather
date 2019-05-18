@@ -7,16 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class CitiesListAdapter extends RecyclerView.Adapter<CitiesListAdapter.CitiesListHolder> {
     private ArrayList<String> cities;
+    private OnItemButtonClickListener listener;
 
     public CitiesListAdapter(ArrayList<String> cities) {
         super();
         this.cities = cities;
+    }
+
+    public void setButtonDeleteListener(OnItemButtonClickListener listener){
+        this.listener = listener;
     }
 
     public void addCity(String city) {
@@ -25,6 +29,11 @@ public class CitiesListAdapter extends RecyclerView.Adapter<CitiesListAdapter.Ci
 
         cities.add(city);
         notifyItemInserted(cities.size() - 1);
+    }
+
+    public void removeCity(int idx) {
+        notifyItemRemoved(idx);
+        cities.remove(idx);
     }
 
     public ArrayList<String> getCities() {
@@ -38,16 +47,7 @@ public class CitiesListAdapter extends RecyclerView.Adapter<CitiesListAdapter.Ci
                 .getContext())
                 .inflate(R.layout.city_item, viewGroup, false);
 
-        return new CitiesListHolder(viewItem,
-                (view, position) -> {
-                    if (cities.size() == 1) {
-                        Toast.makeText(view.getContext(), "Нельзя удалить последний город", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    notifyItemRemoved(position);
-                    cities.remove(position);
-                });
+        return new CitiesListHolder(viewItem,listener);
     }
 
     @Override

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="winds">
+        <item>N</item>
+        <item>S</item>
+        <item>E</item>
+        <item>W</item>
+        <item>NW</item>
+        <item>NE</item>
+        <item>SE</item>
+        <item>SW</item>
+    </string-array>
+
+    <string-array name="parts_of_day">
+        <item>Morning</item>
+        <item>Day</item>
+        <item>Evening</item>
+        <item>Night</item>
+    </string-array>
+
+</resources>

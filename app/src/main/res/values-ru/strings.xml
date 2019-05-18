@@ -12,6 +12,9 @@
     <string name="button_refresh_description">Обновить</string>
     <string name="button_settings_description">Настройки</string>
     <string name="main_location_name">Барнаул</string>
-    <string name="main_activity_name">Погода, она такая</string>
+    <string name="main_activity_name">Погода</string>
     <string name="settings_activity_name">Настройки</string>
+    <string name="pull_to_update">Потяните вниз чтобы обновить</string>
+    <string name="on_last_city_delete">Нельзя удалить последний город</string>
+    <string name="empty_city_field">Поле пустое</string>
 </resources>
