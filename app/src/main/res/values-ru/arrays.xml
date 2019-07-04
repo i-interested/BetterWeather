@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="winds">
+        <item>С</item>
+        <item>Ю</item>
+        <item>В</item>
+        <item>З</item>
+        <item>СЗ</item>
+        <item>СВ</item>
+        <item>ЮВ</item>
+        <item>ЮЗ</item>
+    </string-array>
+
+    <string-array name="parts_of_day">
+        <item>Утро</item>
+        <item>День</item>
+        <item>Вечер</item>
+        <item>Ночь</item>
+    </string-array>
+
+</resources>

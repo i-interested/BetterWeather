@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,13 +24,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/settings_location_name"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/setting_location_name_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_10dp"
                 android:layout_weight="1"
-                android:hint="@string/settings_hint_location_name" />
+                android:hint="@string/settings_hint_location_name"
+                app:errorEnabled="true">
+
+                <EditText
+                    android:id="@+id/settings_location_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10dp" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/add_button"
@@ -41,10 +50,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_cities"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 

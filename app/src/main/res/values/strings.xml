@@ -13,4 +13,7 @@
     <string name="main_location_name">Barnaul</string>
     <string name="main_activity_name">The Weather</string>
     <string name="settings_activity_name">Settings</string>
+    <string name="pull_to_update">Pull down to refresh</string>
+    <string name="on_last_city_delete">The last city can\'t be deleted</string>
+    <string name="empty_city_field">Field is empty</string>
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/padding_8dp"
+    android:layout_margin="@dimen/margin_10dp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     app:cardCornerRadius="@dimen/padding_4dp"
     app:cardBackgroundColor="#E2ECFD">
@@ -27,14 +27,6 @@
             style="@style/AppTheme.WHWrapContent"
             android:text="@string/main_part_of_day"
             android:textSize="@dimen/text_26sp" />
-
-        <!--<fragment
-            android:id="@+id/weather_fragment"
-            class="com.example.betterweather.WeatherFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </fragment>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,6 +54,7 @@
                     android:text="@string/main_weather_now"
                     android:textSize="@dimen/text_60sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -85,6 +78,7 @@
                     style="@style/AppTheme.WHWrapContent.AdditionalInfo"
                     android:text="@string/main_wind" />
             </LinearLayout>
+
         </LinearLayout>
 
         <GridView
@@ -95,4 +89,5 @@
             android:gravity="center"
             android:numColumns="4" />
     </LinearLayout>
+
 </android.support.v7.widget.CardView>
